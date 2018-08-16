@@ -1,33 +1,35 @@
 package ht.queeny.nbpharma;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.backendless.Backendless;
+import com.backendless.BackendlessUser;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import java.text.BreakIterator;
-
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //constant pour backendless// connection avec backendless
 
     private static final String TAG = "LoginActivity";
     private boolean mIsResolving = false;
@@ -36,7 +38,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
-
+    Button btnLogin;
+    EditText UserName;
+    EditText Password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +65,49 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signInButton.setColorScheme(SignInButton.COLOR_LIGHT);
         // [END customize_button]
 
+        UserName = findViewById(R.id.etUserName);
+        Password= findViewById(R.id.etPassword);
+        btnLogin = findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserName.getText().toString();
+                Password.getText().toString();
+
+                if(UserName.getText().toString() != "" &&  Password.getText().toString() != ""){
+                    get_login_user(UserName.getText().toString(), Password.getText().toString());
+                }else{
+                    Toast.makeText(LoginActivity.this, "empty", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
     }
 
+    private void get_login_user(String username, String password) {
+        // do not forget to call Backendless.initApp in the app initialization code
+
+        Backendless.UserService.login( username, password, new AsyncCallback<BackendlessUser>()
+        {
+            public void handleResponse( BackendlessUser user )
+            {
+                // user has been logged in
+                //user.getEmail();
+
+                Toast.makeText(LoginActivity.this, ""+user.getProperty("name"), Toast.LENGTH_SHORT).show();
+                Intent myIntent = new Intent(LoginActivity.this, Mainmenue.class);
+                myIntent.putExtra("email",user.getEmail());
+                startActivity(myIntent);
+                finish();
+            }
+
+            public void handleFault( BackendlessFault fault )
+            {
+                // login failed, to get the error code call fault.getCode()
+            }
+        });
+    }
 
 
     // [START onActivityResult]
@@ -147,7 +192,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (account != null) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
         } else {
-            mStatus.setText(R.string.signed_out);
+            //mStatus.setText(R.string.signed_out);
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
 
         }
