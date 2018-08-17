@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -26,6 +27,8 @@ public class Mainmenue extends AppCompatActivity
         setContentView(R.layout.activity_mainmenue);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        String email = getIntent().getStringExtra("email");
+        String name = getIntent().getStringExtra("name");
         Toast.makeText(this, ""+getIntent().getStringExtra("email"), Toast.LENGTH_SHORT).show();
 
 
@@ -45,6 +48,12 @@ public class Mainmenue extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View header =  navigationView.getHeaderView(0);
+        TextView tvName = header.findViewById(R.id.name);
+        tvName.setText(name);
+        TextView tvEmail = header.findViewById(R.id.email);
+        tvEmail.setText(email);
+
         navigationView.setNavigationItemSelectedListener(this);
     }
 
