@@ -17,6 +17,7 @@
         android:padding="16dp"
         android:text="Register and Sign in"
         android:textAllCaps="true"
+        android:textColor="@color/colorGray"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -49,18 +50,14 @@
         android:drawableLeft="@drawable/ic_lock_white_24dp"
         />
 
-
-
-
-
     <Button
+        android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Login in"
         android:textAllCaps="true"
         android:textColor="#fff"
-        android:id="@+id/btnLogin"
         android:background="@drawable/background_login_two"
         android:paddingLeft="48dp"
         android:paddingRight="48dp"
@@ -75,10 +72,10 @@
         android:layout_marginTop="32dp"
         android:padding="2dp"
         android:text="-------------  OR  --------------"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="18sp"
-        android:textStyle="bold"
 
-        />
+        android:textStyle="bold" />
 
 
     <LinearLayout
@@ -106,7 +103,6 @@
             android:layout_weight=".5" />
         <Button
             android:layout_width="0dp"
-            android:id="@+id/btnRegister"
             android:layout_height="wrap_content"
             android:text="Register"
             android:textStyle="bold"
