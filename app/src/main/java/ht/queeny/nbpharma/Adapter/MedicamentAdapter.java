@@ -62,11 +62,6 @@ public class MedicamentAdapter extends ArrayAdapter<MedicamentAdapter> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.nomMedicament.setText(medicamentAdapters.());
-        viewHolder.adresseEndroit.setText(endroit.getAdresseEndroit());
-        viewHolder.telephoneEndroit.setText(endroit.getTelephoneEndroit());
-       return super.getView(position, convertView, parent);
-
 
 
     }
