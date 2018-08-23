@@ -49,7 +49,7 @@ public class Medicaments implements Serializable {
                 Medicaments medicaments = new Medicaments();
             medicaments.setNomMedicament((String) map.get(i).get("NomMedicament"));
             medicaments.setDateExpi((String) map.get(i).get("DateExpiration"));
-            medicaments.setImageMedicament((String) map.get(i).get("DateExpiration"));
+            medicaments.setImageMedicament((String) map.get(i).get("imageExpiration"));
 
 
             medicament.add(medicaments);
