@@ -13,20 +13,10 @@ public class Medicaments implements Serializable {
 
     private String nomMedicament; //in database
     private String dateExpi; //in database
-    private String imageEndroit;
+    private String imageMedicament;
 
 
-    public String getNomMedicament() {
-        return nomMedicament;
-    }
 
-    public String getDateExpi() {
-        return dateExpi;
-    }
-
-    public String getImageEndroit() {
-        return imageEndroit;
-    }
 
     public void setNomMedicament(String nomMedicament) {
         this.nomMedicament = nomMedicament;
@@ -37,7 +27,7 @@ public class Medicaments implements Serializable {
     }
 
     public void setImageMedicament(String imageMedicament) {
-        this.imageEndroit = imageEndroit;
+        this.imageMedicament = imageMedicament;
     }
 
 
@@ -46,7 +36,7 @@ public class Medicaments implements Serializable {
         ArrayList<Medicaments> medicament = new ArrayList();
 
         for (int i = 0; i < map.size(); i++) {
-                Medicaments medicaments = new Medicaments();
+            Medicaments medicaments = new Medicaments();
             medicaments.setNomMedicament((String) map.get(i).get("NomMedicament"));
             medicaments.setDateExpi((String) map.get(i).get("DateExpiration"));
             medicaments.setImageMedicament((String) map.get(i).get("imageExpiration"));

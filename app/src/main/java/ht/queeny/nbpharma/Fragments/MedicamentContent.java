@@ -48,8 +48,8 @@ public class MedicamentContent extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            //throw new RuntimeException(context.toString()
+                    //+ " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -73,4 +73,6 @@ public class MedicamentContent extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }

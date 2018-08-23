@@ -26,6 +26,7 @@ import java.util.TreeMap;
 
 import ht.queeny.nbpharma.Adapter.CustomExpendableListAdapter;
 import ht.queeny.nbpharma.Fragments.FragmentContent;
+import ht.queeny.nbpharma.Fragments.MedicamentContent;
 import ht.queeny.nbpharma.Helper.FragmentNavigationManage;
 import ht.queeny.nbpharma.Interface.NavigationManage;
 
@@ -157,11 +158,20 @@ public class MenueDrawer extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("fragmentContent", 1);
 
+                    MedicamentContent medicamentContent = new MedicamentContent();
+                    medicamentContent.setArguments(bundle);
+                    //
+                    onFragmentTransaction(medicamentContent);
+
+                }else if (selectedItem  == "Liste Pharmacie"){
+                    //navigationManage.showFragment(selectedItem);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("fragmentContent", 1);
+
                     FragmentContent fragmentContent = new FragmentContent();
                     fragmentContent.setArguments(bundle);
-                    //
-                    onFragmentTransaction(fragmentContent);
 
+                    onFragmentTransaction(fragmentContent);
                 }
                 else{
                     //throw new IllegalArgumentException("Not a supported Fragment");
