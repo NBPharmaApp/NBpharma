@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
@@ -43,12 +44,18 @@ public class MenueDrawer extends AppCompatActivity {
     private Map<String ,List<String>> listChild;
     private NavigationManage navigationManage;
 
+    /*private SearchView searchView = null;
+    private SearchView.OnQueryTextListener queryTextListener;*/
+
+
     private FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_menue_drawer);
+
 
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
