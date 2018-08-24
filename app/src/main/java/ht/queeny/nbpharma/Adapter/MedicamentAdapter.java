@@ -40,21 +40,21 @@ public class MedicamentAdapter extends ArrayAdapter<MedicamentAdapter> {
                 TextView nomMedicament;
                 TextView dateExpi;
                 ImageView imageMedicament;
-                private List<ht.queeny.nbpharma.Adapter.MedicamentAdapter> list;
-                ArrayList<ht.queeny.nbpharma.Adapter.MedicamentAdapter> listMedicament;
+                private List<MedicamentAdapter> list;
+                ArrayList<MedicamentAdapter> listMedicament;
             }
 
-            public MedicamentAdapter(Context context, ArrayList<ht.queeny.nbpharma.Adapter.MedicamentAdapter> medoc) {
+            public MedicamentAdapter(Context context, ArrayList<MedicamentAdapter> medoc) {
                 super(context, R.layout.list_item, medoc);
             }
 
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                ht.queeny.nbpharma.Adapter.MedicamentAdapter.ViewHolder viewHolder;
-                final ht.queeny.nbpharma.Adapter.MedicamentAdapter medicamentAdapter = getItem(position);
+                MedicamentAdapter.ViewHolder viewHolder;
+                final MedicamentAdapter medicamentAdapter = getItem(position);
                 if (convertView == null) {
-                    viewHolder = new ht.queeny.nbpharma.Adapter.MedicamentAdapter.ViewHolder();
+                    viewHolder = new MedicamentAdapter.ViewHolder();
                     LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
                     convertView = layoutInflater.inflate(R.layout.list_item, null, true);
 
@@ -66,7 +66,7 @@ public class MedicamentAdapter extends ArrayAdapter<MedicamentAdapter> {
                     convertView.setTag(viewHolder);
                 } else {
                     // View is being recycled, retrieve the viewHolder object from tag
-                    viewHolder = (ht.queeny.nbpharma.Adapter.MedicamentAdapter.ViewHolder) convertView.getTag();
+                    viewHolder = (MedicamentAdapter.ViewHolder) convertView.getTag();
                 }
 
                 viewHolder.nomMedicament.setText(medicamentAdapter.getNomMedicament());
