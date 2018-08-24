@@ -13,13 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:largeHeap="true">
-<<<<<<< .merge_file_eJDDDJ
         <activity android:name=".MainActivity"
-=======
-
-        <activity
-            android:name=".MainActivity"
->>>>>>> .merge_file_B60jgJ
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
