@@ -101,16 +101,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".5" />
+
         <Button
+            android:id="@+id/register"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Register"
-            android:textStyle="bold"
             android:layout_weight="4.5"
-            android:textColor="#fff"
             android:background="@drawable/background_login_two"
+            android:text="Register"
             android:textAllCaps="false"
-            />
+            android:textColor="#fff"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
