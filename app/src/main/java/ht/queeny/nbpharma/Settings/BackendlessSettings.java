@@ -1,4 +1,4 @@
-package ht.queeny.nbpharma.settings;
+package ht.queeny.nbpharma.Settings;
 
 /**
  * Created by root on 8/17/18.
