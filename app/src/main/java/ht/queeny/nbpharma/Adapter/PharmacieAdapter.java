@@ -1,5 +1,6 @@
 package ht.queeny.nbpharma.Adapter;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -14,30 +15,46 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import ht.queeny.nbpharma.Models.Pharmacie;
 import ht.queeny.nbpharma.R;
 
 public class PharmacieAdapter extends ArrayAdapter<PharmacieAdapter> {
 
-    private String NomPharmacie; //in database
-    private String ImagesParmacie; //in database
-
+    private String adresse;
+    private String email;
+    private String horaire;
+    private String Images;
+    private String Intineraire;
+    private Double map_lati;
+    private Double map_long;
+    private String nom;
+    private String Pharmacien_responsable;
+    private int status;
+    private String  telephone;
+    private Date created;
+    Pharmacie pharma = new Pharmacie();
     ArrayList<PharmacieAdapter> PharmacieAdapter;
     Context context;
     int resource;
 
-    public String getNomPharmacie() {
-        return NomPharmacie;
-    }
-
-    public String getImagesParmacie() {
-        return ImagesParmacie;
-    }
 
     private static class ViewHolder {
-        TextView NomPharmacie;
-        ImageView ImagesParmacie;
+        TextView adresse;
+        TextView email;
+        TextView horaire;
+        TextView Intineraire;
+        TextView map_lati;
+        TextView map_long;
+        TextView nom;
+        TextView Pharmacien_responsable;
+        TextView status;
+        TextView telephone;
+        TextView created;
+        ImageView Images;
+
 
         private List<PharmacieAdapter> list;
         ArrayList<PharmacieAdapter> listPharmacie;
@@ -57,8 +74,18 @@ public class PharmacieAdapter extends ArrayAdapter<PharmacieAdapter> {
             LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_item, null, true);
 
-            viewHolder.NomPharmacie = (TextView) convertView.findViewById(R.id.NomPharmacie);
-            viewHolder.ImagesParmacie = (ImageView) convertView.findViewById(R.id.ImagesPharmacie);
+//            viewHolder.adresse = (TextView) convertView.findViewById(R.id.NomPharmacie);
+//            viewHolder.email = (TextView) convertView.findViewById(R.id.NomPharmacie);
+//            viewHolder.horaire = (TextView) convertView.findViewById(R.id.NomPharmacie);
+//            viewHolder.Intineraire = (TextView) convertView.findViewById(R.id.NomPharmacie);
+//            viewHolder.map_lati = (TextView) convertView.findViewById(R.id.NomPharmacie);
+//            viewHolder.map_long = (TextView) convertView.findViewById(R.id.NomPharmacie);
+//            viewHolder.nom = (TextView) convertView.findViewById(R.id.NomPharmacie);
+//            viewHolder.Pharmacien_responsable = (TextView) convertView.findViewById(R.id.NomPharmacie);
+//            viewHolder.status = (TextView) convertView.findViewById(R.id.NomPharmacie);
+//            viewHolder.telephone = (TextView) convertView.findViewById(R.id.NomPharmacie);
+//            viewHolder.created = (TextView) convertView.findViewById(R.id.NomPharmacie);
+//            viewHolder.Images = (ImageView) convertView.findViewById(R.id.ImagesPharmacie);
 
             //Cache the viewHolder object inside the fresh view
             convertView.setTag(viewHolder);
@@ -67,15 +94,14 @@ public class PharmacieAdapter extends ArrayAdapter<PharmacieAdapter> {
             viewHolder = (PharmacieAdapter.ViewHolder) convertView.getTag();
         }
 
-        viewHolder.NomPharmacie.setText(PharmacieAdapter.getNomPharmacie());
-        viewHolder.ImagesParmacie.setVisibility(View.GONE);
+        viewHolder.nom.setText(pharma.getNom());
+        viewHolder.Images.setVisibility(View.GONE);
 
         Picasso.with(getContext())
-                .load(PharmacieAdapter.getImagesPharmacie())
-                .resize(220, 130).into(viewHolder.ImagesPharmacie);
+                .load(pharma.getImages())
+                .resize(220, 130).into(viewHolder.Images);
 
         return convertView;
 
     }
-
 }

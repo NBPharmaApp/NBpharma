@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ht.queeny.nbpharma.Models.Register;
 import ht.queeny.nbpharma.R;
 
 public class RegisterAdapter extends ArrayAdapter<RegisterAdapter> {
@@ -21,6 +22,7 @@ public class RegisterAdapter extends ArrayAdapter<RegisterAdapter> {
         private String UserName; //in database
         private String Phone; //in database
         private String Email; //in database
+        Register register = new Register();
 
         ArrayList<RegisterAdapter> RegisterAdapter;
         Context context;
@@ -38,7 +40,7 @@ public class RegisterAdapter extends ArrayAdapter<RegisterAdapter> {
         private static class ViewHolder {
             TextView UserName;
             TextView Phone;
-            ImageView Email;
+            TextView Email;
             private List<RegisterAdapter> list;
             ArrayList<RegisterAdapter> listUser;
         }
@@ -57,8 +59,7 @@ public class RegisterAdapter extends ArrayAdapter<RegisterAdapter> {
                 LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
                 convertView = layoutInflater.inflate(R.layout.list_item, null, true);
 
-                viewHolder.UserName = (TextView) convertView.findViewById(R.id.UserName);
-                viewHolder.Phone = (TextView) convertView.findViewById(R.id.Phone);
+                viewHolder.UserName = (TextView) convertView.findViewById(R.id.balance);
 
                // Velly Verifye code sa stp
                 viewHolder.Email = (TextView) convertView.findViewById(R.id.Email);
@@ -70,9 +71,8 @@ public class RegisterAdapter extends ArrayAdapter<RegisterAdapter> {
                 viewHolder = (RegisterAdapter.ViewHolder) convertView.getTag();
             }
 
-            viewHolder.UserName.setText(RegisterAdapter.getUserName());
-            viewHolder.Phone.setText(RegisterAdapter.getPhone());
-            viewHolder.Email.setText(RegisterAdapter.getEmail());
+            viewHolder.UserName.setText(register.getUserName());
+            viewHolder.Email.setText(register.getEmail());
 
             //Picasso.with(getContext())
                   //  .load(medicamentAdapter.getImageMedicament())

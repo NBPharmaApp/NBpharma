@@ -8,11 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,46 +19,46 @@ import ht.queeny.nbpharma.R;
  * Created by root on 8/21/18.
  */
 
-public class CategoriesAdapter extends ArrayAdapter<CategoriesAdapter> {
+public class CategorieAdapter extends ArrayAdapter<CategorieAdapter> {
 
-    private String descCategorie; //in database
-    private String objectCategorie; //in database
+    private String description; //in database
+    private String objectId; //in database
 
-    ArrayList<CategoriesAdapter> CategoriesAdapter;
+    ArrayList<CategorieAdapter> CategorieAdapter;
     Context context;
     int resource;
 
-    public String getDescCategorie() {
-        return descCategorie;
+    public String getDescription() {
+        return description;
     }
 
-    public String getObjectCategorie() {
-        return objectCategorie;
+    public String getObjectId() {
+        return objectId;
     }
 
     private static class ViewHolder {
-        TextView descCategorie;
-        TextView objectCategorie;
-        private List<CategoriesAdapter> list;
-        ArrayList<CategoriesAdapter> listCategories;
+        TextView description;
+        TextView objectId;
+        private List<CategorieAdapter> list;
+        ArrayList<CategorieAdapter> listCategories;
     }
 
-    public CategoriesAdapter(Context context, ArrayList<CategoriesAdapter> categories) {
-        super(context, R.layout.list_item, categories);
+    public CategorieAdapter(Context context, ArrayList<CategorieAdapter> categorie) {
+        super(context, R.layout.list_item, categorie);
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ViewHolder viewHolder;
-        final CategoriesAdapter categoriesAdapter = getItem(position);
+        final CategorieAdapter CategorieAdapter = getItem(position);
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_item, null, true);
 
-            viewHolder.descCategorie = (TextView) convertView.findViewById(R.id.DescCategorie);
-            viewHolder.objectCategorie = (TextView) convertView.findViewById(R.id.ObjectCategorie);
+           // viewHolder.description = (TextView) convertView.findViewById(R.id.description);
+           // viewHolder.objectId = (TextView) convertView.findViewById(R.id.objectId);
 
 
             //Cache the viewHolder object inside the fresh view
@@ -72,8 +68,8 @@ public class CategoriesAdapter extends ArrayAdapter<CategoriesAdapter> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.descCategorie.setText(CategoriesAdapter.getDescCategorie());
-        viewHolder.objectCategorie.setText(CategoriesAdapter.getObjectCategorie());
+        viewHolder.description.setText(CategorieAdapter.getDescription());
+        viewHolder.objectId.setText(CategorieAdapter.getObjectId());
 
         // Picasso.with(getContext())
         //   .load(CategorieAdapter.getImageMedicament())

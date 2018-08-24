@@ -18,10 +18,11 @@ import java.util.List;
 
 import ht.queeny.nbpharma.R;
 
+
 public class MedicamentAdapter extends ArrayAdapter<MedicamentAdapter> {
 
             private String nomMedicament; //in database
-            private String dateExpi; //in database
+            private String dateExpiration; //in database
             private String imageMedicament;
 
             ArrayList<MedicamentAdapter> medicamentAdapters;
@@ -38,7 +39,7 @@ public class MedicamentAdapter extends ArrayAdapter<MedicamentAdapter> {
 
             private static class ViewHolder {
                 TextView nomMedicament;
-                TextView dateExpi;
+                TextView dateExpiration;
                 ImageView imageMedicament;
                 private List<MedicamentAdapter> list;
                 ArrayList<MedicamentAdapter> listMedicament;
@@ -59,7 +60,7 @@ public class MedicamentAdapter extends ArrayAdapter<MedicamentAdapter> {
                     convertView = layoutInflater.inflate(R.layout.list_item, null, true);
 
                     viewHolder.nomMedicament = (TextView) convertView.findViewById(R.id.nomMedicament);
-                    viewHolder.dateExpi = (TextView) convertView.findViewById(R.id.dateExpi);
+                    viewHolder.dateExpiration = (TextView) convertView.findViewById(R.id.dateExpi);
                     viewHolder.imageMedicament = (ImageView) convertView.findViewById(R.id.imgMedoc);
 
                     //Cache the viewHolder object inside the fresh view
@@ -70,7 +71,7 @@ public class MedicamentAdapter extends ArrayAdapter<MedicamentAdapter> {
                 }
 
                 viewHolder.nomMedicament.setText(medicamentAdapter.getNomMedicament());
-                viewHolder.dateExpi.setText(medicamentAdapter.getImageMedicament());
+                viewHolder.dateExpiration.setText(medicamentAdapter.getImageMedicament());
                 viewHolder.imageMedicament.setVisibility(View.GONE);
 
                 Picasso.with(getContext())
@@ -82,7 +83,6 @@ public class MedicamentAdapter extends ArrayAdapter<MedicamentAdapter> {
             }
 
 }
-
 
 
 
