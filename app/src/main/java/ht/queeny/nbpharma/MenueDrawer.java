@@ -1,7 +1,11 @@
 package ht.queeny.nbpharma;
 
+import android.annotation.SuppressLint;
 import android.content.res.Configuration;
+import android.location.Location;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -10,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.graphics.drawable.DrawerArrowDrawable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +22,22 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.Place;
+
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+
+import com.backendless.Backendless;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -28,15 +49,20 @@ import java.util.TreeMap;
 import ht.queeny.nbpharma.Adapter.CustomExpendableListAdapter;
 import ht.queeny.nbpharma.Fragments.FragmentContent;
 import ht.queeny.nbpharma.Fragments.MedicamentContent;
+import ht.queeny.nbpharma.Fragments.PharmacieContent;
 import ht.queeny.nbpharma.Helper.FragmentNavigationManage;
 import ht.queeny.nbpharma.Interface.NavigationManage;
+import ht.queeny.nbpharma.Settings.BackendlessSettings;
 
-public class MenueDrawer extends AppCompatActivity {
+public class MenueDrawer extends AppCompatActivity  {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
     private String[] items;
+
+    //googlemap
+    private GoogleMap mMap;
 
     private ExpandableListView expandableListView;
     private ExpandableListAdapter adapter;
@@ -53,8 +79,10 @@ public class MenueDrawer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_menue_drawer);
+
+
+
 
 
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
@@ -85,6 +113,7 @@ public class MenueDrawer extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("NBPharma");
+
 
         
     }
@@ -163,7 +192,7 @@ public class MenueDrawer extends AppCompatActivity {
                 if(selectedItem  == "Liste Medicament"){
                     //navigationManage.showFragment(selectedItem);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("fragmentContent", 1);
+                    bundle.putSerializable("medicamentContent", 1);
 
                     MedicamentContent medicamentContent = new MedicamentContent();
                     medicamentContent.setArguments(bundle);
@@ -171,14 +200,13 @@ public class MenueDrawer extends AppCompatActivity {
                     onFragmentTransaction(medicamentContent);
 
                 }else if (selectedItem  == "Liste Pharmacie"){
-                    //navigationManage.showFragment(selectedItem);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("fragmentContent", 1);
+                    bundle.putSerializable("pharmacieContent", 2);
 
-                    FragmentContent fragmentContent = new FragmentContent();
-                    fragmentContent.setArguments(bundle);
+                    PharmacieContent pharmacieContent = new PharmacieContent();
+                    pharmacieContent.setArguments(bundle);
 
-                    onFragmentTransaction(fragmentContent);
+                    onFragmentTransaction(pharmacieContent);
                 }
                 else{
                     //throw new IllegalArgumentException("Not a supported Fragment");
@@ -217,11 +245,11 @@ public class MenueDrawer extends AppCompatActivity {
         items = new String[]{"Medicament","Pharmacie", "Conseil", "A Propos"};
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mainmenue, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -231,4 +259,6 @@ public class MenueDrawer extends AppCompatActivity {
             return true;
         return super.onOptionsItemSelected(item);
     }
+
+
 }
