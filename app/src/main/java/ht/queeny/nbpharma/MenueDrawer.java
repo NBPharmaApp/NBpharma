@@ -1,6 +1,7 @@
 package ht.queeny.nbpharma;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.support.annotation.NonNull;
@@ -18,8 +19,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +66,25 @@ public class MenueDrawer extends AppCompatActivity  {
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
     private String[] items;
+    Integer[] imageIDs = {
+            R.drawable.med1,
+            R.drawable.med2,
+            R.drawable.med3,
+            R.drawable.med1,
+            R.drawable.med2,
+            R.drawable.med3,
+            R.drawable.med1,
+            R.drawable.med3,
+            R.drawable.med3,
+            R.drawable.med1,
+            R.drawable.med2,
+            R.drawable.med1,
+            R.drawable.med2,
+            R.drawable.med3,
+            R.drawable.med1,
+            R.drawable.med2,
+
+    };
 
     //googlemap
     private GoogleMap mMap;
@@ -82,9 +107,23 @@ public class MenueDrawer extends AppCompatActivity  {
         setContentView(R.layout.activity_menue_drawer);
 
 
+        //grid view custumization
+        GridView gridView = (GridView) findViewById(R.id.gridview);
+        gridView.setAdapter(new ImageAdapter(this));
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            public void onItemClick(AdapterView<?> parent,
+                                    View v, int position, long id)
+            {
+                Toast.makeText(getBaseContext(),
+                        "pic" + (position + 1) + " selected",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
-
+        //Drawer layout
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
         expandableListView =(ExpandableListView)findViewById(R.id.nav_list);
@@ -118,6 +157,50 @@ public class MenueDrawer extends AppCompatActivity  {
         
     }
 
+    //Grid view custumization
+
+    public class ImageAdapter extends BaseAdapter
+    {
+        private Context context;
+
+        public ImageAdapter(Context c)
+        {
+            context = c;
+        }
+
+        //---returns the number of images---
+        public int getCount() {
+            return imageIDs.length;
+        }
+
+        //---returns the ID of an item---
+        public Object getItem(int position) {
+            return position;
+        }
+
+        public long getItemId(int position) {
+            return position;
+        }
+
+        //---returns an ImageView view---
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            ImageView imageView;
+            if (convertView == null) {
+                imageView = new ImageView(context);
+                imageView.setLayoutParams(new GridView.LayoutParams(350, 350));
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setPadding(5, 10, 5, 5);
+            } else {
+                imageView = (ImageView) convertView;
+            }
+            imageView.setImageResource(imageIDs[position]);
+            return imageView;
+        }
+    }
+
+
+        // --connection for drawer
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
