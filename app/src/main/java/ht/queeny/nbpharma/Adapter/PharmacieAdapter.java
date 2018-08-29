@@ -47,7 +47,7 @@ public class PharmacieAdapter extends ArrayAdapter<pharmacies> {
 
         TextView address = convertView.findViewById(R.id.address);
         TextView nom = convertView.findViewById(R.id.tvNom);
-        ImageView image = convertView.findViewById(R.id.imageView2);
+        //ImageView image = convertView.findViewById(R.id.imageView2);
         address.setText(pharmacieList.get(position).getAdresse());
         nom.setText(pharmacieList.get(position).getNom());
 
